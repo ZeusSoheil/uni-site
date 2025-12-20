@@ -142,9 +142,10 @@
                             text: `سلام ${userData.name}، ورود شما موفقیت آمیز بود.`,
                             icon: 'success',
                             confirmButtonText: 'ورود به پنل'
-                        });
-                        // اینجا می‌توانید کد انتقال به صفحه اصلی سایت را بنویسید
-                        // window.location.href = "dashboard.html"; 
+                        }).then(() => {
+                             // کد انتقال به سایت اصلی
+                           window.location.href = "index.html"; 
+                         });
                     } else {
                         Swal.fire('خطا', 'رمز عبور اشتباه است', 'error');
                     }
@@ -153,4 +154,5 @@
         }
     </script>
 </body>
+
 </html>
