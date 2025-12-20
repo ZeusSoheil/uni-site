@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه ثبت نام و ورود </title>
+    <link rel="icon" href="img/fav.ico" type="image/x-icon">    
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Css/loginstyle.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-section">
+            <div class="toggle-container">
+                <button class="toggle-btn" id="loginTab" onclick="switchMode('login')">ورود</button>
+                <button class="toggle-btn active" id="signupTab" onclick="switchMode('signup')">ثبت نام</button>
+            </div>
+
+            <form id="authForm" onsubmit="handleForm(event)">
+                <div class="input-group" id="nameField">
+                    <input type="text" id="fullname" placeholder="نام و نام خانوادگی">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="ایمیل" required>
+                    <i class="fa-solid fa-at"></i>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="رمز عبور" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="input-group" id="confirmPasswordField">
+                    <input type="password" id="confirmPassword" placeholder="تکرار رمز عبور">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn" >ثبت نام</button>
+            </form>
+        </div>
+
+        <div class="image-section">
+            <div class="logo">
+                <i class="fa-solid fa-book-open"></i>
+                <span>کتاب لند</span>
+            </div>
+                <div class="img-login">
+                    <img src="img/login-pic.png" alt="" >
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // متغیر برای تشخیص حالت فعلی (ثبت نام یا ورود)
+        let isSignup = true;
+
+        // تابع تغییر حالت بین ورود و ثبت نام
+        function switchMode(mode) {
+            const loginTab = document.getElementById('loginTab');
+            const signupTab = document.getElementById('signupTab');
+            const nameField = document.getElementById('nameField');
+            const confirmPassField = document.getElementById('confirmPasswordField');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (mode === 'login') {
+                isSignup = false;
+                loginTab.classList.add('active');
+                signupTab.classList.remove('active');
+                // مخفی کردن فیلدهای اضافی
+                nameField.classList.add('hide');
+                confirmPassField.classList.add('hide');
+                submitBtn.innerText = "ورود به حساب";
+            } else {
+                isSignup = true;
+                signupTab.classList.add('active');
+                loginTab.classList.remove('active');
+                // نمایش فیلدها
+                nameField.classList.remove('hide');
+                confirmPassField.classList.remove('hide');
+                submitBtn.innerText = "ثبت نام";
+            }
+        }
+
+        // تابع اصلی پردازش فرم
+        function handleForm(e) {
+            e.preventDefault(); // جلوگیری از رفرش شدن صفحه
+
+            const email = document.getElementById('email').value.toLowerCase(); // ایمیل را کوچک می‌کنیم
+            const password = document.getElementById('password').value;
+            
+            if (isSignup) {
+                // --- منطق ثبت نام ---
+                const fullname = document.getElementById('fullname').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (!fullname) {
+                    Swal.fire('خطا', 'لطفا نام خود را وارد کنید', 'error');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    Swal.fire('خطا', 'رمز عبور با تکرار آن مطابقت ندارد', 'error');
+                    return;
+                }
+                if (localStorage.getItem(email)) {
+                    Swal.fire('توجه', 'این ایمیل قبلاً ثبت شده است. لطفا وارد شوید.', 'warning');
+                    return;
+                }
+
+                // ذخیره اطلاعات در LocalStorage
+                const userData = {
+                    name: fullname,
+                    pass: password
+                };
+                localStorage.setItem(email, JSON.stringify(userData));
+
+                Swal.fire({
+                    title: 'ثبت نام موفق!',
+                    text: `خوش آمدی ${fullname}، حالا می‌توانی وارد شوی.`,
+                    icon: 'success',
+                    confirmButtonText: 'باشه'
+                }).then(() => {
+                    switchMode('login'); // انتقال خودکار به صفحه ورود
+                });
+
+            } else {
+                // --- منطق ورود ---
+                const storedUser = localStorage.getItem(email);
+
+                if (!storedUser) {
+                    Swal.fire('خطا', 'کاربری با این ایمیل پیدا نشد', 'error');
+                } else {
+                    const userData = JSON.parse(storedUser);
+                    if (password === userData.pass) {
+                        Swal.fire({
+                            title: 'خوش آمدید!',
+                            text: `سلام ${userData.name}، ورود شما موفقیت آمیز بود.`,
+                            icon: 'success',
+                            confirmButtonText: 'ورود به پنل'
+                        });
+                        // اینجا می‌توانید کد انتقال به صفحه اصلی سایت را بنویسید
+                        // window.location.href = "dashboard.html"; 
+                    } else {
+                        Swal.fire('خطا', 'رمز عبور اشتباه است', 'error');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

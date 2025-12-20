@@ -1,0 +1,323 @@
+/* تنظیمات کلی صفحه */
+:root {
+    --bg-color: #051b2c;
+    --card-bg: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    --accent-yellow: #00eeff;
+    --btn-purple-gradient: linear-gradient(45deg, #7b1fa2, #4a148c);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Vazirmatn', sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+     background-color: #0c2d48;
+     height: 50px;
+}
+
+
+/* --- دکمه‌ها (Buttons) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #1a73e8; /* رنگ اصلی آبی */
+    color: white;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    margin-right: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5fc9;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* --- هدر (Header) و ناوبری --- */
+.main-header {
+    
+    color: white;
+    padding: 15px 0;
+    position: sticky;
+
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo span {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ساختار هدر هر بخش */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    padding: 0 10px;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.section-title span {
+    color: var(--accent-yellow);
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    border-color: var(--accent-yellow);
+    color: white;
+}
+
+/* گرید کارت‌ها */
+.grid-container {
+    display: grid;
+    /* عرض کارت‌ها رو کمی منعطف‌تر کردم تا بهتر جا بشن */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+     .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+/* استایل کارت مانگا */
+.manga-card {
+    background: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.manga-card:hover {
+    transform: translateY(-5px);
+}
+
+/* --- بخش اصلاح شده برای رفع مشکل کشیدگی تصویر --- */
+
+.image-container {
+    position: relative;
+    width: 100%;
+    /* نسبت تصویر استاندارد پوسترها (2 به 3) */
+    aspect-ratio: 2 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #2a2a2a; 
+}
+
+.image-container img {
+    /* استفاده از پوزیشن Absolute برای اینکه عکس نتونه سایز کادر رو دستکاری کنه */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* برش عکس برای پر کردن فضا بدون دفرمه شدن */
+    object-fit: cover; 
+    /* تمرکز روی بالای عکس (معمولا صورت کاراکترها بالاست) */
+    object-position: top center; 
+    
+    display: block;
+    z-index: 1; 
+}
+
+.overlay-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.5) 60%, transparent);
+    z-index: 2; 
+    pointer-events: none; 
+}
+
+/* بج‌ها (برچسب‌ها) */
+.badge-tr {
+     position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.75); 
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    z-index: 3; 
+    backdrop-filter: blur(4px);
+}
+
+.chapter-count {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #eee;
+    font-size: 0.85rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0.6);
+    padding: 4px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+    z-index: 3; 
+    border: 1px solid rgba(255,255,255,0.1);
+}
+/* --- بخش اصلاح شده برای رفع مشکل کشیدگی تصویر (پایان) --- */
+
+
+.dot-green { color: #00e676; font-size: 1.2em; line-height: 0.5; }
+
+/* اطلاعات پایین کارت */
+.card-info {
+    padding: 12px 5px;
+}
+
+.manga-title {
+    font-size: 0.95rem;
+    color: white;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+    text-align: left;
+}
+
+.manga-title-fa {
+     font-size: 0.85rem;
+     color: var(--text-secondary);
+     margin-bottom: 10px;
+     text-align: right;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating {
+    color: var(--accent-yellow);
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.rating span {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.star-icon {
+    fill: var(--accent-yellow);
+    width: 14px;
+    height: 14px;
+}
+
+.btn-subscribe {
+    background: var(--btn-purple-gradient);
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-family: inherit;
+}

@@ -1,0 +1,167 @@
+ /* تنظیمات کلی صفحه */
+        body {
+            background-color: #051b2c; /* رنگ پس‌زمینه کل صفحه */
+            font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+     background-color: #0c2d48;
+}
+
+
+/* --- دکمه‌ها (Buttons) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #1a73e8; /* رنگ اصلی آبی */
+    color: white;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    margin-right: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5fc9;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* --- هدر (Header) و ناوبری --- */
+.main-header {
+    
+    color: white;
+    padding: 15px 0;
+    position: sticky;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo span {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+        /* باکس اصلی */
+        .terms-container {
+            background-color: #0c2d48; /* رنگ پس‌زمینه کارت */
+            color: #dcdcdc; /* رنگ متن */
+            max-width: 900px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            line-height: 1.8;
+            font-size: 14px;
+            margin-top: 50px;
+        }
+
+        /* هدر و تیتر */
+        .header-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-title h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            padding-right: 10px;
+            border-right: 4px solid #f39c12; /* خط نارنجی سمت راست */
+            height: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* پاراگراف مقدمه */
+        .intro-text {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* لیست قوانین */
+        .rules-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .rules-list li {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .rules-list strong {
+            color: #ffffff; /* رنگ سفید برای تیترهای بولد */
+            font-weight: 700;
+        }
+
+        /* بخش فوتر (تاریخ) */
+        .footer-date {
+            margin-top: 30px;
+            text-align: left; /* چپ‌چین کردن تاریخ */
+            color: #2ecc71; /* رنگ سبز */
+            font-size: 13px;
+        }
+
+        /* ریسپانسیو برای موبایل */
+        @media (max-width: 600px) {
+            .terms-container {
+                padding: 15px;
+            }
+            .header-title h2 {
+                font-size: 16px;
+            }
+        }
